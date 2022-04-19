@@ -15,4 +15,3 @@ function getLocs() {
         }, 2000)
     })
 }
-
