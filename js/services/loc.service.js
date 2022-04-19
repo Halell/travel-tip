@@ -16,4 +16,3 @@ function getLocs() {
     })
 }
 
-console.log('hay')
