@@ -25,5 +25,5 @@ body>main>section.map-infos.main-layout.flex.space-around>div.loc-infos.flex.col
 }
 
 .loc-btn.go-to-loc-btn {
-    background-color: var(--primary-clr-400);
+    background-color: var(--primary-clr-location);
 }
