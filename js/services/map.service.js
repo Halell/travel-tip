@@ -5,7 +5,9 @@ import { storageService } from '../services/storage.service.js'
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getMap,
+    addNewPlace
 }
 
 const STORAGE_KEY = 'PLACES'
@@ -22,23 +24,23 @@ function loadPlaces() {
 
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
+
     return _connectGoogleApi()
-        .then(gMap => {
+        .then(() => {
             console.log('google available')
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
-            // gMap.addListener("dblclick", (ev) => {
-            //     let newPos = addNewPlace(ev)
-            //     if (!newPos.placeName) return
-            //     addMarker(newPos)
-            //     renderPlace(gPlaces)
-            // })
+
         })
 }
 
+function getMap() {
+    console.log('hay')
+    return gMap
+}
 function addMarker(newPos) {
     console.log('newPos :', newPos)
 
@@ -59,6 +61,8 @@ function panTo(lat, lng) {
 
 
 function _connectGoogleApi() {
+    console.log('ingoogle :')
+
     if (window.google) return Promise.resolve()
     var elGoogleApi = document.createElement('script')
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
@@ -66,8 +70,6 @@ function _connectGoogleApi() {
     document.body.append(elGoogleApi)
 
     return new Promise((resolve, reject) => {
-        console.log(' :', elGoogleApi.onload())
-
         elGoogleApi.onload = resolve
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
@@ -85,12 +87,11 @@ function addNewPlace(ev) {
         lng: ev.latLng.lng(),
         placeName: prompt('name'),
     }
-
-    if (!newPos.placeName) return newPos
-
+    if (!newPos.placeName) return
+    addMarker(newPos)
     gPlaces.push(newPos)
     _savePlacesToStorage()
-    return newPos
+    return gPlaces
 }
 // function deletePlaceIdx(idx) {
 //     gPlaces.splice(idx, 1)

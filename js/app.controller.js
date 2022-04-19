@@ -9,8 +9,12 @@ window.onGetUserPos = onGetUserPos
 
 function onInit() {
     mapService.initMap()
-        .then((map) => {
-            console.log(map)
+        .then(() => {
+            mapService.getMap()
+                .addListener("dblclick", (ev) => {
+                    let places = mapService.addNewPlace(ev)
+                    renderPlace(places)
+                })
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -29,16 +33,10 @@ function renderPlace(places) {
     var htmlStr = ''
     places.map((place, idx) => {
         htmlStr += `<li class="location" data-loc-num="1">
-        Home
-        <img src="" class="delete-loc-btn">
-        <img src="" class="go-to-loc-btn">
-    </li>`
-
-        // `<div>
-        // <div >${place.placeName}</div>
-        // <img class="go-to" onclick="goToSavedPlace(${idx})" src="css/img/my-locations-icon.png">
-        // <img class="delete-place"onclick="deletePlace(${idx})" src="css/img/delete.png">
-        // </div>`
+                     Home
+                        <img src="" class="delete-loc-btn">
+                        <img src="" class="go-to-loc-btn">
+                     </li>`
     })
     var elPlaces = document.querySelector('.map-saved-places-container')
     elPlaces.innerHTML = htmlStr
