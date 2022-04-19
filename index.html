@@ -26,15 +26,33 @@
             <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
             <button onclick="onPanTo()" class="btn-pan">Go to Tokyo</button>
         </section>
+        <section class="current-loc-container">
+            <div class="current-loc flex">
+                <p>Location: <span class="user-pos">
+                    <!-- location Name Goes Here! -->
+                </span></p>
+                <button onclick="onCopy()" class="btn-copy">Copy Location</button>
+            </div>
+        </section>
         <section class="map-infos">
             <div class="map-container main-layout">
                 <div id="map" style="width: 100%; height: 400px;"></div>
             </div>
 
             <div class="loc-infos">
-                <p>Location: <span class="user-pos"></span></p>
-                <p>Locations: <span class="locs"></span></p>
-            </div>
+                <h3>Locations: </h3>
+
+                <ul class="locs clean-list">
+                    <!-- ONLY TAKE li FOR RENDER!! RENDER INTO CLASS locs  -->
+                    <li class="location" data-loc-num="1">
+                        Home
+                        <img src="" class="delete-loc-btn">
+                        <img src="" class="go-to-loc-btn">
+                    </li>
+
+                </ul>
+
+
         </section>
     </main>
     <script src="lib/axios.js"></script>
