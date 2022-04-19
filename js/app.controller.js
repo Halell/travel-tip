@@ -6,6 +6,8 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onClickPanTo = onClickPanTo
+window.onDeletePlace = onDeletePlace
 
 function onInit() {
     mapService.initMap()
@@ -34,12 +36,8 @@ function renderPlace(places) {
     var htmlStr = places.map((place) => {
         return `<li class="location" data-loc="${place.placeName}"onclick="">
                      Home
-                     <div class="delete-container">
-                        <img src="" class="loc-btn delete-loc-btn" data-loc="${place.lat, place.lng}"onclick="onDeletePlace(this.dataset.loc)">
-                    </div>
-                    <div class="delete-container">
-                        <img src="" class="loc-btn go-to-loc-btn" data-loc="${place.lat, place.lng}"onclick="onClickPanTo(this.dataset.loc)">
-                    </div>
+                        <img src="assets/img/delete.png" class="delete-loc-btn" data-loc="${place.lat},${place.lng}"onclick="onDeletePlace(this.dataset.loc)">
+                        <img src="assets/img/my-locations-icon.png" class="go-to-loc-btn" data-loc="${place.lat},${place.lng}" onclick="onClickPanTo(this.dataset.loc)">
                      </li>`
     }).join()
     var elPlaces = document.querySelector('.locs')
@@ -74,6 +72,7 @@ function onGetUserPos() {
 }
 
 function onClickPanTo(pos) {
+    console.log(pos)
     let posObj = {
         lat: pos.split(',')[0],
         lng: pos.split(',')[1]
@@ -84,4 +83,8 @@ function onClickPanTo(pos) {
 function onPanTo(pos) {
     console.log('Panning the Map')
     mapService.panTo(pos)
+}
+
+function onDeletePlace(t) {
+    console.log('delete here')
 }
