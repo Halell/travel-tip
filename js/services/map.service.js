@@ -38,31 +38,24 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function getMap() {
-    console.log('hay')
     return gMap
 }
 function addMarker(newPos) {
-    console.log('newPos :', newPos)
-
     var marker = new google.maps.Marker({
         position: { lat: newPos.lat, lng: newPos.lng },
         map: gMap,
         title: newPos.placeName
     })
-    console.log('newPos.placeName :', newPos.placeName)
-
     return marker
 }
 
-function panTo(lat, lng) {
-    var laLatLng = new google.maps.LatLng(lat, lng)
+function panTo(pos) {
+    var laLatLng = new google.maps.LatLng(pos.lat, pos.lng)
     gMap.panTo(laLatLng)
 }
 
 
 function _connectGoogleApi() {
-    console.log('ingoogle :')
-
     if (window.google) return Promise.resolve()
     var elGoogleApi = document.createElement('script')
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
