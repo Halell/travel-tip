@@ -9,7 +9,7 @@
 body>main>section.map-infos.main-layout.flex.space-around>div.loc-infos.flex.col-dir {
     height: 200px;
     width: 200px;
-    background-color: #2196F3;
+    background-color: var(--primary-clr-200);
     align-self: center;
     border-radius: 0.3em;
 }
@@ -22,11 +22,11 @@ body>main>section.map-infos.main-layout.flex.space-around>div.loc-infos.flex.col
 
 .loc-btn.delete-loc-btn {
     background-image: url('../../assets/img/delete.png');
-    background-color: tomato;
+    background-color: var(--primary-clr-alert);
 }
 
 .loc-btn.go-to-loc-btn {
     background-image: url('../../assets/img/my-locations-icon.png');
-    background-color: rgb(92, 134, 177);
+    background-color: var(--primary-clr-400);
     ;
 }

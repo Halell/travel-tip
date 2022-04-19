@@ -32,10 +32,14 @@ function getPosition() {
 function renderPlace(places) {
     console.log(places)
     var htmlStr = places.map((place) => {
-        return `<li class="saved-location" data-loc="${place.placeName}"onclick="">
+        return `<li class="location" data-loc="${place.placeName}"onclick="">
                      Home
-                        <img src="" class="delete-loc-btn" data-loc="${place.lat, place.lng}"onclick="onDeletePlace(this.dataset.loc)">
-                        <img src="" class="go-to-loc-btn" data-loc="${place.lat, place.lng}"onclick="onClickPanTo(this.dataset.loc)">
+                     <div class="delete-container">
+                        <img src="" class="loc-btn delete-loc-btn" data-loc="${place.lat, place.lng}"onclick="onDeletePlace(this.dataset.loc)">
+                    </div>
+                    <div class="delete-container">
+                        <img src="" class="loc-btn go-to-loc-btn" data-loc="${place.lat, place.lng}"onclick="onClickPanTo(this.dataset.loc)">
+                    </div>
                      </li>`
     }).join()
     var elPlaces = document.querySelector('.locs')
