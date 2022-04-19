@@ -30,9 +30,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available')
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: { lat, lng },
+                    zoom: 15
+                })
 
         })
 }
@@ -40,6 +40,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 function getMap() {
     return gMap
 }
+
 function addMarker(newPos) {
     var marker = new google.maps.Marker({
         position: { lat: newPos.lat, lng: newPos.lng },
@@ -75,7 +76,7 @@ function _connectGoogleApi() {
 
 function addNewPlace(ev) {
     var newPos = {
-        id: 0,// add incrementor
+        id: 0, // add incrementor
         lat: ev.latLng.lat(),
         lng: ev.latLng.lng(),
         placeName: prompt('name'),
