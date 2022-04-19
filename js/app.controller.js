@@ -9,8 +9,8 @@ window.onGetUserPos = onGetUserPos
 
 function onInit() {
     mapService.initMap()
-        .then(() => {
-            console.log('Map is ready')
+        .then((map) => {
+            console.log(map)
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -25,14 +25,20 @@ function getPosition() {
 
 //-----------------render ---------------------//
 
-function renderPlace() {
+function renderPlace(places) {
     var htmlStr = ''
-    gPlaces.map((place, idx) => {
-        htmlStr += `<div>
-        <div >${place.placeName}</div>
-        <img class="go-to" onclick="goToSavedPlace(${idx})" src="css/img/my-locations-icon.png">
-        <img class="delete-place"onclick="deletePlace(${idx})" src="css/img/delete.png">
-        </div>`
+    places.map((place, idx) => {
+        htmlStr += `<li class="location" data-loc-num="1">
+        Home
+        <img src="" class="delete-loc-btn">
+        <img src="" class="go-to-loc-btn">
+    </li>`
+
+        // `<div>
+        // <div >${place.placeName}</div>
+        // <img class="go-to" onclick="goToSavedPlace(${idx})" src="css/img/my-locations-icon.png">
+        // <img class="delete-place"onclick="deletePlace(${idx})" src="css/img/delete.png">
+        // </div>`
     })
     var elPlaces = document.querySelector('.map-saved-places-container')
     elPlaces.innerHTML = htmlStr

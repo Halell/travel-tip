@@ -22,30 +22,33 @@ function loadPlaces() {
 
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap')
     return _connectGoogleApi()
-        .then(() => {
+        .then(gMap => {
             console.log('google available')
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
-            gMap.addListener("dblclick", (ev) => {
-                let newPos = addNewPlace(ev)
-                if (!newPos.placeName) return
-                addMarker({ lat: ev.latLng.lat(), lng: ev.latLng.lng() }, newPos)
-
-            })
+            // gMap.addListener("dblclick", (ev) => {
+            //     let newPos = addNewPlace(ev)
+            //     if (!newPos.placeName) return
+            //     addMarker(newPos)
+            //     renderPlace(gPlaces)
+            // })
         })
 }
 
 function addMarker(newPos) {
+    console.log('newPos :', newPos)
+
     var marker = new google.maps.Marker({
         position: { lat: newPos.lat, lng: newPos.lng },
         map: gMap,
         title: newPos.placeName
     })
+    console.log('newPos.placeName :', newPos.placeName)
+
     return marker
 }
 
@@ -56,8 +59,6 @@ function panTo(lat, lng) {
 
 
 function _connectGoogleApi() {
-    console.log('ingoogle :')
-
     if (window.google) return Promise.resolve()
     var elGoogleApi = document.createElement('script')
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
@@ -65,6 +66,8 @@ function _connectGoogleApi() {
     document.body.append(elGoogleApi)
 
     return new Promise((resolve, reject) => {
+        console.log(' :', elGoogleApi.onload())
+
         elGoogleApi.onload = resolve
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
