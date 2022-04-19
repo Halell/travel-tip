@@ -26,6 +26,7 @@
             <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
             <button onclick="onPanTo()" class="btn-pan">Go to Tokyo</button>
         </section>
+
         <section class="current-loc-container main-layout">
             <div class="current-loc flex">
                 <p>Location: <span class="user-pos">
@@ -35,16 +36,19 @@
                 <button onclick="onCopy()" class="btn-copy">Copy Location</button>
             </div>
         </section>
+
         <section class="map-infos main-layout flex space-around">
-            <div class="loc-infos">
+            <div class="loc-infos flex col-dir">
                 <h3>Locations: </h3>
 
                 <ul class="locs clean-list">
                     <!-- ONLY TAKE li FOR RENDER!! RENDER INTO CLASS locs -->
-                    <li class="location" data-loc-num="1">
+                    <li class="location flex" data-loc-num="1">
                         Home
-                        <img src="" class="delete-loc-btn">
-                        <img src="" class="go-to-loc-btn">
+                        <div class="loc-btn-container">
+                            <img src="assets/img/delete.png" class="loc-btn delete-loc-btn">
+                            <img src="assets/img/my-locations-icon.png" class="loc-btn go-to-loc-btn">
+                        </div>
                     </li>
                     <li class="location" data-loc-num="1">
                         Home
@@ -65,6 +69,9 @@
 
         </section>
     </main>
+    <footer class="main-layout flex align-center justify-center">
+        <h3 class="sub logo">Travel<span>Tip</span> </h3>
+    </footer>
     <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
 </body>
