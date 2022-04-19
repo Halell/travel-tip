@@ -30,15 +30,15 @@ function getPosition() {
 //-----------------render ---------------------//
 
 function renderPlace(places) {
-    var htmlStr = ''
-    places.map((place, idx) => {
-        htmlStr += `<li class="location" data-loc-num="1">
+    console.log(places)
+    var htmlStr = places.map((place) => {
+        return `<li class="saved-location" data-loc="${place.placeName}"onclick="">
                      Home
-                        <img src="" class="delete-loc-btn">
-                        <img src="" class="go-to-loc-btn">
+                        <img src="" class="delete-loc-btn" data-loc="${place.lat, place.lng}"onclick="onDeletePlace(this.dataset.loc)">
+                        <img src="" class="go-to-loc-btn" data-loc="${place.lat, place.lng}"onclick="onClickPanTo(this.dataset.loc)">
                      </li>`
-    })
-    var elPlaces = document.querySelector('.map-saved-places-container')
+    }).join()
+    var elPlaces = document.querySelector('.locs')
     elPlaces.innerHTML = htmlStr
 }
 
@@ -68,7 +68,16 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
+
+function onClickPanTo(pos) {
+    let posObj = {
+        lat: pos.split(',')[0],
+        lng: pos.split(',')[1]
+    }
+    mapService.panTo(posObj)
+}
+
+function onPanTo(pos) {
     console.log('Panning the Map')
-    mapService.panTo(35.6895, 139.6917)
+    mapService.panTo(pos)
 }
