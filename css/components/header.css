@@ -1,0 +1,26 @@
+.logo {
+    margin: 0;
+    font-family: rubik;
+    font-size: 2.5em;
+}
+
+.search-btn {
+    height: 100%;
+    text-transform: uppercase;
+}
+
+.btn-user-pos {
+    height: 2.9375rem;
+}
+
+.search-bar.flex.main-layout {
+    margin-right: 0;
+}
+
+.logo span {
+    margin-top: 5px;
+}
+
+.header-container.main-layout {
+    margin-top: 1rem;
+}

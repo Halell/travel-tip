@@ -2,10 +2,32 @@
     display: flex;
 }
 
+.flex.col-dir {
+    flex-direction: column;
+}
+
 .space-between {
     justify-content: space-between;
 }
 
 .space-around {
     justify-content: space-around;
+}
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.clean-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.grid {
+    display: grid;
 }
