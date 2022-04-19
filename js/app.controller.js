@@ -1,31 +1,48 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 
-window.onload = onInit;
-window.onAddMarker = onAddMarker;
-window.onPanTo = onPanTo;
-window.onGetLocs = onGetLocs;
-window.onGetUserPos = onGetUserPos;
+window.onload = onInit
+window.onAddMarker = onAddMarker
+window.onPanTo = onPanTo
+window.onGetLocs = onGetLocs
+window.onGetUserPos = onGetUserPos
 
 function onInit() {
     mapService.initMap()
         .then(() => {
-            console.log('Map is ready');
+            console.log('Map is ready')
         })
-        .catch(() => console.log('Error: cannot init map'));
+        .catch(() => console.log('Error: cannot init map'))
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
-    console.log('Getting Pos');
+    console.log('Getting Pos')
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
 
+//-----------------render ---------------------//
+
+function renderPlace() {
+    var htmlStr = ''
+    gPlaces.map((place, idx) => {
+        htmlStr += `<div>
+        <div >${place.placeName}</div>
+        <img class="go-to" onclick="goToSavedPlace(${idx})" src="css/img/my-locations-icon.png">
+        <img class="delete-place"onclick="deletePlace(${idx})" src="css/img/delete.png">
+        </div>`
+    })
+    var elPlaces = document.querySelector('.map-saved-places-container')
+    elPlaces.innerHTML = htmlStr
+}
+
+// --------------- on events-------------------//
+
 function onAddMarker() {
-    console.log('Adding a marker');
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    console.log('Adding a marker')
+    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
 }
 
 function onGetLocs() {
@@ -39,15 +56,15 @@ function onGetLocs() {
 function onGetUserPos() {
     getPosition()
         .then(pos => {
-            console.log('User position is:', pos.coords);
+            console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
         })
         .catch(err => {
-            console.log('err!!!', err);
+            console.log('err!!!', err)
         })
 }
 function onPanTo() {
-    console.log('Panning the Map');
-    mapService.panTo(35.6895, 139.6917);
+    console.log('Panning the Map')
+    mapService.panTo(35.6895, 139.6917)
 }
